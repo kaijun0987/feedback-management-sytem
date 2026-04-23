@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  R_SUPER
+  R_ADMIN
+  R_USER_COMMON
+}
+
+enum FeedbackFormStatus {
+  ENABLED
+  DISABLED
+}
+
+enum FeedbackQuestionType {
+  TEXT
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+  STAR
+}
+
+model User {
+  id             String             @id @default(cuid())
+  employeeNo     String?            @unique
+  userName       String
+  displayName    String
+  email          String?            @unique
+  passwordHash   String
+  role           UserRole           @default(R_USER_COMMON)
+  isActive       Boolean            @default(true)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  createdForms   FeedbackForm[]     @relation("FeedbackFormCreatedBy")
+  responses      FeedbackResponse[]
+
+  @@map("users")
+}
+
+model FeedbackForm {
+  id                String               @id @default(cuid())
+  slug              String               @unique
+  title             String
+  description       String               @default("")
+  status            FeedbackFormStatus   @default(ENABLED)
+  startAt           DateTime
+  endAt             DateTime?
+  estimatedMinutes  Int                  @default(1)
+  tags              String[]             @default([])
+  createdById       String
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  createdBy         User                 @relation("FeedbackFormCreatedBy", fields: [createdById], references: [id])
+  questions         FeedbackQuestion[]
+  responses         FeedbackResponse[]
+
+  @@index([status, startAt, endAt])
+  @@map("feedback_forms")
+}
+
+model FeedbackQuestion {
+  id            String                @id @default(cuid())
+  formId        String
+  title         String
+  description   String                @default("")
+  type          FeedbackQuestionType
+  required      Boolean               @default(true)
+  sortOrder     Int
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  form          FeedbackForm          @relation(fields: [formId], references: [id], onDelete: Cascade)
+  options       FeedbackQuestionOption[]
+  answers       FeedbackAnswer[]
+
+  @@index([formId, sortOrder])
+  @@map("feedback_questions")
+}
+
+model FeedbackQuestionOption {
+  id          String           @id @default(cuid())
+  questionId  String
+  label       String
+  value       String
+  sortOrder   Int
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  question    FeedbackQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId, sortOrder])
+  @@map("feedback_question_options")
+}
+
+model FeedbackResponse {
+  id                  String           @id @default(cuid())
+  formId              String
+  submitterId         String?
+  /** HMAC(secret, userId:formId) — identifies one submission per user per form without storing userId when anonymous */
+  submissionOwnerHash String?
+  isAnonymous         Boolean          @default(false)
+  submittedAt         DateTime         @default(now())
+  createdAt           DateTime         @default(now())
+  form                FeedbackForm     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  submitter           User?            @relation(fields: [submitterId], references: [id], onDelete: SetNull)
+  answers             FeedbackAnswer[]
+
+  @@index([formId, submittedAt])
+  @@index([submitterId])
+  @@index([formId, submissionOwnerHash])
+  @@map("feedback_responses")
+}
+
+model FeedbackAnswer {
+  id            String           @id @default(cuid())
+  responseId    String
+  questionId    String
+  textValue     String?
+  numberValue   Float?
+  jsonValue     Json?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  response      FeedbackResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  question      FeedbackQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([responseId])
+  @@index([questionId])
+  @@unique([responseId, questionId])
+  @@map("feedback_answers")
+}
