@@ -63,6 +63,7 @@ export const useFeedbackStore = defineStore(SetupStoreId.Feedback, () => {
       questionCount: 'questionCount' in form ? form.questionCount : form.questions.length,
       estimatedMinutes: form.estimatedMinutes,
       responseCount: form.responseCount,
+      allowAnonymous: form.allowAnonymous,
       tags: clone(form.tags)
     };
   }
@@ -77,6 +78,7 @@ export const useFeedbackStore = defineStore(SetupStoreId.Feedback, () => {
       endAt: detail.endAt ? dayjs(detail.endAt).valueOf() : null,
       tags: clone(detail.tags),
       estimatedMinutes: detail.estimatedMinutes,
+      allowAnonymous: detail.allowAnonymous,
       questions: detail.questions.map(question => ({
         id: question.id,
         title: question.title,
@@ -100,6 +102,7 @@ export const useFeedbackStore = defineStore(SetupStoreId.Feedback, () => {
       startAt: draft.startAt ? dayjs(draft.startAt).format('YYYY-MM-DD') : null,
       endAt: draft.endAt ? dayjs(draft.endAt).format('YYYY-MM-DD') : null,
       estimatedMinutes: draft.estimatedMinutes,
+      allowAnonymous: draft.allowAnonymous,
       tags: draft.tags.map(item => item.trim()).filter(Boolean),
       questions: draft.questions.map(question => ({
         id: question.id,

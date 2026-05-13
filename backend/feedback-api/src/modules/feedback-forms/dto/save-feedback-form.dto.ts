@@ -59,6 +59,9 @@ export class SaveFeedbackFormDto {
   @Min(1)
   estimatedMinutes!: number;
 
+  @IsBoolean()
+  allowAnonymous!: boolean;
+
   @IsArray()
   tags!: string[];
 

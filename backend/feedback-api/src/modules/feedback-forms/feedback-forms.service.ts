@@ -18,6 +18,7 @@ interface FormRecord {
   questionCount: number;
   estimatedMinutes: number;
   responseCount: number;
+  allowAnonymous: boolean;
   tags: string[];
 }
 
@@ -63,6 +64,7 @@ export class FeedbackFormsService {
       questionCount: form.questions.length,
       estimatedMinutes: form.estimatedMinutes,
       responseCount: form._count.responses,
+      allowAnonymous: form.allowAnonymous,
       tags: [...form.tags]
     };
   }
@@ -175,6 +177,7 @@ export class FeedbackFormsService {
           startAt: this.parseDate(payload.startAt),
           endAt: this.parseNullableDate(payload.endAt),
           estimatedMinutes: payload.estimatedMinutes,
+          allowAnonymous: payload.allowAnonymous,
           tags: payload.tags,
           createdById: userId,
           questions: {
@@ -260,6 +263,7 @@ export class FeedbackFormsService {
           startAt: this.parseDate(payload.startAt),
           endAt: this.parseNullableDate(payload.endAt),
           estimatedMinutes: payload.estimatedMinutes,
+          allowAnonymous: payload.allowAnonymous,
           tags: payload.tags
         }
       });

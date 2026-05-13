@@ -12,6 +12,7 @@ export const initialFeedbackForms: FeedbackFormRecord[] = [
     questionCount: 5,
     estimatedMinutes: 2,
     responseCount: 48,
+    allowAnonymous: true,
     tags: ['Always open', 'Office']
   },
   {
@@ -25,6 +26,7 @@ export const initialFeedbackForms: FeedbackFormRecord[] = [
     questionCount: 8,
     estimatedMinutes: 4,
     responseCount: 23,
+    allowAnonymous: true,
     tags: ['Event', 'HR']
   },
   {
@@ -38,6 +40,7 @@ export const initialFeedbackForms: FeedbackFormRecord[] = [
     questionCount: 10,
     estimatedMinutes: 6,
     responseCount: 0,
+    allowAnonymous: true,
     tags: ['Confidential', 'Leadership']
   },
   {
@@ -51,6 +54,7 @@ export const initialFeedbackForms: FeedbackFormRecord[] = [
     questionCount: 6,
     estimatedMinutes: 3,
     responseCount: 12,
+    allowAnonymous: true,
     tags: ['Facilities']
   },
   {
@@ -64,6 +68,7 @@ export const initialFeedbackForms: FeedbackFormRecord[] = [
     questionCount: 3,
     estimatedMinutes: 1,
     responseCount: 31,
+    allowAnonymous: true,
     tags: ['Vote', 'Culture']
   }
 ];

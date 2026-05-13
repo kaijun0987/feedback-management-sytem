@@ -83,6 +83,10 @@ export class FeedbackResponsesService {
       throw new NotFoundException('Feedback form not found');
     }
 
+    if (payload.anonymous && !form.allowAnonymous) {
+      throw new BadRequestException('Anonymous submissions are not allowed for this form');
+    }
+
     const questionMap = new Map(form.questions.map(question => [question.id, question]));
     const answerData = payload.answers.map(answer => {
       const question = questionMap.get(answer.questionId);

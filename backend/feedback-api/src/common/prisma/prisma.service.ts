@@ -18,13 +18,41 @@ export class PrismaService implements OnModuleDestroy {
       return;
     }
 
+    const ssl = this.resolveSslConfig(databaseUrl);
+
     const adapter = new PrismaPg(
       new Pool({
-        connectionString: databaseUrl
+        connectionString: databaseUrl,
+        connectionTimeoutMillis: 5000,
+        idleTimeoutMillis: 10000,
+        ssl
       })
     );
 
     this.clientInstance = new PrismaClient({ adapter });
+  }
+
+  private resolveSslConfig(databaseUrl: string) {
+    try {
+      const url = new URL(databaseUrl);
+      const sslMode = url.searchParams.get('sslmode');
+      const host = url.hostname.toLowerCase();
+      const isLocalHost = host === 'localhost' || host === '127.0.0.1';
+
+      if (sslMode === 'disable' || isLocalHost) {
+        return undefined;
+      }
+
+      // AWS RDS requires encrypted connections in many setups. We enable TLS
+      // explicitly here instead of relying on the connection string parser.
+      return {
+        rejectUnauthorized: false
+      };
+    } catch {
+      return {
+        rejectUnauthorized: false
+      };
+    }
   }
 
   async onModuleDestroy() {

@@ -30,6 +30,13 @@ const statusOptions = computed(() => [
 ]);
 
 const draft = ref<FeedbackFormDraft>(createEmptyDraft());
+
+const allowAnonymousModel = computed({
+  get: () => draft.value.allowAnonymous,
+  set: (v: boolean) => {
+    draft.value.allowAnonymous = v;
+  }
+});
 const initialSnapshot = ref('');
 
 const drawerTitle = computed(() =>
@@ -59,6 +66,7 @@ function createEmptyDraft(): FeedbackFormDraft {
     endAt: null,
     tags: [],
     estimatedMinutes: 2,
+    allowAnonymous: true,
     questions: [createQuestion()]
   };
 }
@@ -221,6 +229,20 @@ function handleSave() {
             <NFormItem :label="t('page.feedbackForm.builder.tags')">
               <NDynamicTags v-model:value="draft.tags" />
             </NFormItem>
+
+            <div
+              class="flex items-center justify-between gap-12 rounded-12px border border-#e4e7ec p-12 dark:border-#334155/70"
+            >
+              <div>
+                <div class="text-13px font-600 text-#101828 dark:text-#f1f5f9">
+                  {{ t('page.feedbackForm.builder.allowAnonymous') }}
+                </div>
+                <div class="mt-2 text-12px text-#98a2b3 dark:text-#8b93a1">
+                  {{ t('page.feedbackForm.builder.allowAnonymousHint') }}
+                </div>
+              </div>
+              <NSwitch v-model:value="allowAnonymousModel" />
+            </div>
           </NForm>
         </NCard>
 

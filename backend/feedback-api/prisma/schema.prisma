@@ -50,6 +50,8 @@ model FeedbackForm {
   startAt           DateTime
   endAt             DateTime?
   estimatedMinutes  Int                  @default(1)
+  /** When false, submissions must be non-anonymous (named). */
+  allowAnonymous    Boolean              @default(true)
   tags              String[]             @default([])
   createdById       String
   createdAt         DateTime             @default(now())

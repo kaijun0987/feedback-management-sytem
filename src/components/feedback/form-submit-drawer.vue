@@ -34,6 +34,19 @@ const canSubmit = computed(() => Boolean(props.record && props.form));
 
 const isEditMode = computed(() => Boolean(props.initialAnswers?.length));
 
+/** Form-level admin setting: when false, anonymous option is hidden and submit is always named. */
+const allowAnonymousOption = computed(() => props.form?.allowAnonymous !== false);
+
+watch(
+  () => [props.visible, props.form?.allowAnonymous, props.form?.id] as const,
+  () => {
+    if (props.visible && props.form && !allowAnonymousOption.value) {
+      anonymousMode.value = false;
+    }
+  },
+  { immediate: true }
+);
+
 watch(
   () => [props.visible, props.form, props.initialAnswers] as const,
   ([visible]) => {
@@ -154,7 +167,7 @@ function handleSubmit() {
 
   emit('submit', {
     formId: props.record.id,
-    anonymous: anonymousMode.value,
+    anonymous: allowAnonymousOption.value ? anonymousMode.value : false,
     submitterName: props.submitterName,
     answers: Object.entries(answers.value).map(([questionId, value]) => ({
       questionId,
@@ -175,12 +188,15 @@ function handleSubmit() {
               <NTag round :type="record.caseType === 'normal' ? 'info' : 'warning'">
                 {{ getCaseTypeLabel(record.caseType) }}
               </NTag>
-              <NTag round :type="anonymousMode ? 'success' : 'default'">
+              <NTag v-if="allowAnonymousOption" round :type="anonymousMode ? 'success' : 'default'">
                 {{
                   anonymousMode
                     ? t('page.feedback.shared.mode.anonymousEnabled')
                     : t('page.feedback.shared.mode.standardSubmit')
                 }}
+              </NTag>
+              <NTag v-else round type="default">
+                {{ t('page.feedback.shared.mode.standardSubmit') }}
               </NTag>
               <NTag v-for="tag in record.tags" :key="tag" size="small" round>{{ tag }}</NTag>
             </div>
@@ -208,6 +224,7 @@ function handleSubmit() {
               </div>
             </div>
             <div
+              v-if="allowAnonymousOption"
               class="flex items-center justify-between gap-12 border border-#e4e7ec rounded-12px p-12 dark:border-#334155/70 dark:bg-#0f172a/40"
             >
               <div>

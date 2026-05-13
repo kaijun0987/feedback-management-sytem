@@ -551,6 +551,8 @@ const local: App.I18n.Schema = {
         endDate: 'End Date',
         estimatedMinutes: 'Estimated Minutes',
         tags: 'Tags',
+        allowAnonymous: 'Allow anonymous responses',
+        allowAnonymousHint: 'If turned off, submissions are always attributed and users cannot choose anonymous mode.',
         questions: 'Questions',
         addQuestion: 'Add Question',
         questionTitle: 'Question Title',

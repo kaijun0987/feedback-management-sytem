@@ -231,7 +231,9 @@ async function handleWriteFeedback(record: FeedbackFormRecord) {
   activeRecord.value = record;
   activeDraft.value = draft;
   activeInitialAnswers.value = mySubmission?.answers ?? null;
-  if (mySubmission) {
+  if (!draft.allowAnonymous) {
+    anonymousByForm[record.id] = false;
+  } else if (mySubmission) {
     anonymousByForm[record.id] = mySubmission.anonymous;
   }
   submitDrawerVisible.value = true;

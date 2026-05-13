@@ -10,6 +10,7 @@ export const feedbackFormDraftMap: Record<string, FeedbackFormDraft> = {
     endAt: null,
     tags: ['Always open', 'Office'],
     estimatedMinutes: 2,
+    allowAnonymous: true,
     questions: [
       {
         id: 'F-001-Q1',
@@ -51,6 +52,7 @@ export const feedbackFormDraftMap: Record<string, FeedbackFormDraft> = {
     endAt: Date.parse('2026-04-30'),
     tags: ['Event', 'HR'],
     estimatedMinutes: 4,
+    allowAnonymous: true,
     questions: [
       {
         id: 'F-002-Q1',
@@ -96,6 +98,7 @@ export const feedbackFormDraftMap: Record<string, FeedbackFormDraft> = {
     endAt: Date.parse('2026-05-15'),
     tags: ['Confidential', 'Leadership'],
     estimatedMinutes: 6,
+    allowAnonymous: true,
     questions: [
       {
         id: 'F-003-Q1',
@@ -137,6 +140,7 @@ export const feedbackFormDraftMap: Record<string, FeedbackFormDraft> = {
     endAt: null,
     tags: ['Facilities'],
     estimatedMinutes: 3,
+    allowAnonymous: true,
     questions: [
       {
         id: 'F-004-Q1',
@@ -161,6 +165,7 @@ export const feedbackFormDraftMap: Record<string, FeedbackFormDraft> = {
     endAt: Date.parse('2026-04-17'),
     tags: ['Vote', 'Culture'],
     estimatedMinutes: 1,
+    allowAnonymous: true,
     questions: [
       {
         id: 'F-005-Q1',

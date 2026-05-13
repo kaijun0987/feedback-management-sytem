@@ -15,6 +15,8 @@ export interface FeedbackFormRecord {
   questionCount: number;
   estimatedMinutes: number;
   responseCount: number;
+  /** When false, users cannot submit anonymously for this form. */
+  allowAnonymous: boolean;
   tags: string[];
 }
 
@@ -41,6 +43,8 @@ export interface FeedbackFormDraft {
   endAt: number | null;
   tags: string[];
   estimatedMinutes: number;
+  /** Admin: allow end users to choose anonymous submit for this form. */
+  allowAnonymous: boolean;
   questions: FeedbackQuestionDraft[];
 }
 

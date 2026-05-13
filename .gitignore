@@ -40,6 +40,9 @@ yarn.lock
 .env.*.local
 backend/feedback-api/.env
 
+# Local agent / tooling metadata
+.codex/
+
 # pnpm
 .pnpm-store
 
@@ -49,8 +52,10 @@ Thumbs.db
 # Prisma
 backend/feedback-api/prisma/*.db
 backend/feedback-api/prisma/*.db-journal
+backend/feedback-api/src/generated/prisma/
 
 # Build output (if built outside monorepo root)
 backend/feedback-api/dist
+backend/feedback-api-eb*.zip
 
 .VSCodeCounter

@@ -85,6 +85,7 @@ Response:
       "questionCount": 5,
       "estimatedMinutes": 2,
       "responseCount": 48,
+      "allowAnonymous": true,
       "tags": ["Always open", "Office"]
     }
   ]
@@ -109,6 +110,7 @@ Response:
     "endAt": null,
     "estimatedMinutes": 2,
     "responseCount": 48,
+    "allowAnonymous": true,
     "tags": ["Always open", "Office"],
     "questions": [
       {
@@ -125,6 +127,8 @@ Response:
 ```
 
 ### `POST /feedback/forms/:formId/submit`
+
+When the form has `allowAnonymous: false`, `anonymous` must be `false` (otherwise `400`).
 
 Request:
 
@@ -173,6 +177,7 @@ Request:
   "startAt": "2026-05-01",
   "endAt": "2026-05-15",
   "estimatedMinutes": 6,
+  "allowAnonymous": true,
   "tags": ["Confidential", "Leadership"],
   "questions": [
     {

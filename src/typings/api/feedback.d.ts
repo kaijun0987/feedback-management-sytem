@@ -18,6 +18,7 @@ declare namespace Api {
       questionCount: number;
       estimatedMinutes: number;
       responseCount: number;
+      allowAnonymous: boolean;
       tags: string[];
     }
 
@@ -77,6 +78,7 @@ declare namespace Api {
       startAt: string | null;
       endAt: string | null;
       estimatedMinutes: number;
+      allowAnonymous: boolean;
       tags: string[];
       questions: QuestionRecord[];
     }

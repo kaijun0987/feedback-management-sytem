@@ -785,6 +785,8 @@ declare namespace App {
             endDate: string;
             estimatedMinutes: string;
             tags: string;
+            allowAnonymous: string;
+            allowAnonymousHint: string;
             questions: string;
             addQuestion: string;
             questionTitle: string;

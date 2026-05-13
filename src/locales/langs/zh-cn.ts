@@ -542,6 +542,8 @@ const local: App.I18n.Schema = {
         endDate: '结束日期',
         estimatedMinutes: '预计耗时',
         tags: '标签',
+        allowAnonymous: '允许匿名填写',
+        allowAnonymousHint: '关闭后，提交时将以实名展示，且用户无法选择匿名模式。',
         questions: '题目设置',
         addQuestion: '新增题目',
         questionTitle: '题目标题',
