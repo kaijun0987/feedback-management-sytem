@@ -1,3 +1,12 @@
 packages:
   - 'packages/*'
   - 'backend/*'
+
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@parcel/watcher'
+  - '@prisma/engines'
+  - esbuild
+  - prisma
+  - simple-git-hooks
+  - vue-demi
