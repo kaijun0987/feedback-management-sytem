@@ -2,11 +2,11 @@ packages:
   - 'packages/*'
   - 'backend/*'
 
-onlyBuiltDependencies:
-  - '@nestjs/core'
-  - '@parcel/watcher'
-  - '@prisma/engines'
-  - esbuild
-  - prisma
-  - simple-git-hooks
-  - vue-demi
+allowBuilds:
+  '@nestjs/core': true
+  '@parcel/watcher': true
+  '@prisma/engines': true
+  esbuild: true
+  prisma: true
+  simple-git-hooks: true
+  vue-demi: true
