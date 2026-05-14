@@ -52,7 +52,6 @@ Thumbs.db
 # Prisma
 backend/feedback-api/prisma/*.db
 backend/feedback-api/prisma/*.db-journal
-backend/feedback-api/src/generated/prisma/
 
 # Build output (if built outside monorepo root)
 backend/feedback-api/dist

@@ -1,4 +1,4 @@
-import { UserRole } from '@prisma/client';
+import { UserRole } from '../../../generated/prisma';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class ListUsersQueryDto {

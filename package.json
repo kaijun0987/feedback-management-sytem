@@ -36,7 +36,7 @@
     "dev:prod": "vite --mode prod",
     "fmt": "oxfmt",
     "gen-route": "sa gen-route",
-    "lint": "oxlint --fix && eslint --fix .",
+    "lint": "oxlint --fix && eslint --fix . --ignore-pattern 'backend/feedback-api/src/generated/prisma/**'",
     "prepare": "simple-git-hooks",
     "preview": "vite preview",
     "release": "sa release",

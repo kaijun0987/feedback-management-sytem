@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { createHmac } from 'node:crypto';
 import { hash } from 'bcryptjs';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { FeedbackFormStatus, FeedbackQuestionType, PrismaClient, UserRole } from '@prisma/client';
+import { FeedbackFormStatus, FeedbackQuestionType, PrismaClient, UserRole } from '../src/generated/prisma';
 import { Pool } from 'pg';
 
 function submissionOwnerHash(userId: string, formId: string) {

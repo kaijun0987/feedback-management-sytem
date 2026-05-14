@@ -1,4 +1,4 @@
-import { UserRole } from '@prisma/client';
+import { UserRole } from '../../../generated/prisma';
 import { IsBoolean, IsEnum, IsOptional, IsString, MinLength } from 'class-validator';
 
 export class UpdateUserDto {

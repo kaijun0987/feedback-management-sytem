@@ -1,5 +1,5 @@
 import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
-import { UserRole } from '@prisma/client';
+import { UserRole } from '../../generated/prisma';
 import { hash } from 'bcryptjs';
 import dayjs from 'dayjs';
 import type { AuthUser } from '../../common/auth/auth-user';

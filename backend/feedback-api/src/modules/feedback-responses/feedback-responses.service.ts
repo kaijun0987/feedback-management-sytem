@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { createHmac } from 'node:crypto';
-import { FeedbackQuestionType, Prisma } from '@prisma/client';
+import { FeedbackQuestionType, Prisma } from '../../generated/prisma';
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { SubmitFeedbackDto } from './dto/submit-feedback.dto';
 

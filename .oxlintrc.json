@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["backend/feedback-api/src/generated/prisma/**"],
   "categories": {
     "correctness": "error",
     "suspicious": "error"

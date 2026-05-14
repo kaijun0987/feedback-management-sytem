@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { FeedbackFormStatus, FeedbackQuestionType, Prisma } from '@prisma/client';
+import { FeedbackFormStatus, FeedbackQuestionType, Prisma } from '../../generated/prisma';
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { FormListQueryDto } from './dto/form-list-query.dto';
 import { SaveFeedbackFormDto } from './dto/save-feedback-form.dto';
